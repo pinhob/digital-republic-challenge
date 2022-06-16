@@ -2,8 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-const paint = require('./paint.route');
+const paints = require('./paints.route');
 
-router.use('/paint', paint);
+router.use('/paints', paints);
 
 module.exports = router;
