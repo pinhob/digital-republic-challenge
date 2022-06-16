@@ -4,6 +4,6 @@ const router = express.Router();
 
 const paintsController = require('../controllers/paints.controller');
 
-router.get('/', paintsController.getPaints);
+router.post('/', paintsController.getPaints);
 
 module.exports = router;
