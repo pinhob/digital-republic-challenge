@@ -2,8 +2,26 @@ const Joi = require('joi');
 const { getWallArea, getWindowsAndDoorsArea, getTotalArea } = require('../utils/handleArea');
 const { getPaintCansQuantities } = require('../utils/calculatePaintCans');
 
+// TODO: Tratar erros e configurar o Joi. Criar middleware de erro. Criar testes unitários e de integração.
+
+const wallsSchema = Joi.array()
+  .items({
+    height: Joi.number().required(),
+    width: Joi.number().required(),
+    doors: Joi.number().required(),
+    windows: Joi.number().required(),
+  });
 
 const getPaintCans = ({ walls }) => {
+  const { error } = wallsSchema.validate(walls);
+
+  if (error) {
+    wallNumber = error.details[0].path[0];
+    key = error.details[0].context.key;
+
+    throw new Error(`${key} in wall ${wallNumber} is required`);
+  };
+
   const wallsArea = {};
   walls.forEach((wall, index) => {
     const area = getWallArea(wall);
@@ -25,7 +43,8 @@ const getPaintCans = ({ walls }) => {
 
   const paintCans = getPaintCansQuantities(totalAreaToPaint);
 
-  return { paintCans };
+
+  return paintCans;
 
   /*
   const wallsArea = {};

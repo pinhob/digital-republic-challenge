@@ -2,13 +2,13 @@ const paintsService = require('../services/paints.service');
 
 const getPaints = async (req, res, next) => {
   try {
-    const data = req.body;
+    const walls = req.body;
 
-    const paintCans = await paintsService.getPaintCans(data);
+    const data = await paintsService.getPaintCans(walls);
 
-    return res.status(200).json({ data: paintCans });
+    return res.status(200).json({ data });
   } catch (error) {
-    return res.json({ error });
+    return res.json({ error: error.message });
   }
 };
 

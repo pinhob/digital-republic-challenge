@@ -10,14 +10,14 @@ const getPaintCansQuantities = (totalAreaToPaint) => {
 
   Ex: se o usuário precisa de 19 litros, ele deve sugerir 1 lata de 18L + 2 latas de 0,5L.
   */
-  console.log("totalAreaToPAint", totalAreaToPaint);
+  // console.log("totalAreaToPAint", totalAreaToPaint);
 
   const paintCans = [18, 3.6, 2.5, 0.5];
   let paintCansQuantities = paintCans.reduce((acc, val) => ({ ...acc, [val]: 0 }), {});
 
   const neededPaintLiters = getPaintLitersByArea(totalAreaToPaint);
 
-  console.log("🚀 ~ file: calculatePaintCans.js ~ line 21 ~ getPaintCansQuantities ~ neededPaintLiters", neededPaintLiters)
+  // console.log("🚀 ~ file: calculatePaintCans.js ~ line 21 ~ getPaintCansQuantities ~ neededPaintLiters", neededPaintLiters)
 
   let neededLitersRemained = neededPaintLiters;
 
@@ -25,8 +25,6 @@ const getPaintCansQuantities = (totalAreaToPaint) => {
 
   while (neededLitersRemained > 0.5) {
     const paintCan = paintCans.find((paintCan) => paintCan <= neededLitersRemained);
-
-    const paintCanIndex = paintCans.indexOf(paintCan);
 
     paintCansQuantities = {
       ...paintCansQuantities,
@@ -37,7 +35,6 @@ const getPaintCansQuantities = (totalAreaToPaint) => {
   }
 
   return paintCansQuantities;
-  // comparar se cada tamanho de lata de tinta cabe no número de litros necessários. se sim, incrementar a quantidade de latas desse tamanho. se não, ir para tamanho menor.
 };
 
 module.exports = {
