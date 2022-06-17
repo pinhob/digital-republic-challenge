@@ -1,8 +1,11 @@
 const Joi = require('joi');
-const { getWallArea, getWindowsAndDoorsArea, getTotalArea } = require('../utils/handleArea');
+const { getWallArea,
+  getWindowsAndDoorsArea,
+  getTotalArea,
+  validateArea,
+  validateAreaWithWindowsAndDoors } = require('../utils/handleArea');
 const { getPaintCansQuantities } = require('../utils/calculatePaintCans');
-
-// TODO: Tratar erros e configurar o Joi. Criar middleware de erro. Criar testes unitários e de integração.
+const errorMessageConstructor = require('../utils/errorMessageConstructor');
 
 const wallsSchema = Joi.array()
   .items({
@@ -19,22 +22,27 @@ const getPaintCans = ({ walls }) => {
     wallNumber = error.details[0].path[0];
     key = error.details[0].context.key;
 
-    throw new Error(`${key} in wall ${wallNumber} is required`);
+    throw errorMessageConstructor(400, `${key} in wall ${wallNumber} is required`);
   };
 
   const wallsArea = {};
   walls.forEach((wall, index) => {
+    // TODO: Componetizar de forma melhor esta lógica. Colocar todas as validações em um único aruqivo. 
+    if (wall.height < 2.20 && wall.doors > 0) {
+      throw errorMessageConstructor(400, `Wall height must be at least 30 centimeters bigger than door height`);
+    }
+
     const area = getWallArea(wall);
 
-    // const areaIsValid = validateArea(area);
+    const areaIsValid = validateArea(area);
 
-    // if (!areaIsValid) throw errorConstructor(status, message);
+    if (!areaIsValid) throw errorMessageConstructor(400, 'Area is invalid. Wall area must be between 1 and 50');
 
     const windowsAndDoorsArea = getWindowsAndDoorsArea(wall);
 
-    // const areaWithWindowsAndDoorsIsValid = validateArea(windowsAndDoorsArea);
+    const areaWithWindowsAndDoorsIsValid = validateAreaWithWindowsAndDoors(windowsAndDoorsArea, area);
 
-    // if (!areaWithWindowsAndDoorsIsValid) throw errorConstructor(status, message);
+    if (!areaWithWindowsAndDoorsIsValid) throw errorMessageConstructor(400, 'Doors and windows area is invalid. Doors and windows area must be less than 50% of wall area');
 
     wallsArea[index] = area - windowsAndDoorsArea;
   });
@@ -45,33 +53,6 @@ const getPaintCans = ({ walls }) => {
 
 
   return paintCans;
-
-  /*
-  const wallsArea = {};
-  walls.forEach((wall, index) => {
-    const area = getWallArea(wall);
-    
-    const areaIsValid = validateArea(area);
-
-    if (!areaIsValid) throw errorConstructor(status, message);
-
-    const windowsAndDoorsArea = getWindowsAndDoorsArea(wall);
-
-    const areaWithWindowsAndDoorsIsValid = validateArea(windowsAndDoorsArea);
-
-    if (!areaWithWindowsAndDoorsIsValid) throw errorConstructor(status, message);
-
-    wallsArea[index] = area - windowsAndDoorsArea;
-  });
-
-  const totalAreaToPaint = getTotalArea(wallsArea);
-
-  depois de conseguir o totalArea, vamos conseguir a quantidade de latas de tinta necessária para pintar a área total
-
-  const paintCans = getPaintCans(totalAreaToPaint);
-
-  return { paintCans };
-  */
 }
 
 module.exports = {
