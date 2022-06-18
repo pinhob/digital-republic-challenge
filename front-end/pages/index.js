@@ -1,3 +1,4 @@
+import { Results } from "../components"
 import { Forms } from "../components/Forms"
 
 export default function Home() {
@@ -5,6 +6,7 @@ export default function Home() {
     <div>
       <h1>Interior Paints Calculator</h1>
       <Forms />
+      <Results />
     </div>
   )
 };

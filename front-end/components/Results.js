@@ -1,0 +1,35 @@
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../context";
+
+export const Results = () => {
+  const [cans, setCans] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const { paintCans } = useContext(Context);
+
+  const paintCansNumbers = (paintCans) => {
+    const neededCansResult = paintCans.data && Object.entries(paintCans.data).filter(([_key, value]) => value > 0);
+
+    setCans(neededCansResult);
+  }
+
+  useEffect(() => {
+    console.log("RESULTS", paintCans);
+    console.log(paintCansNumbers(paintCans))
+    console.log(cans)
+  }, [paintCans]);
+
+  return (
+    <div>
+      <h1>Results</h1>
+      {
+        cans
+          ? cans.map(([key, value]) => (
+            <p key={key}>
+              {key}: {value}
+            </p>
+          ))
+          : <p>Calculate to get a result</p>
+      }
+    </div>
+  )
+};
