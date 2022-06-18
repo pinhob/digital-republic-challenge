@@ -1,18 +1,20 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatWallsDataToApiFormat } from "../utils";
+import { Context } from "../context";
 
 export const Forms = () => {
   const { register, handleSubmit } = useForm();
+  const { setPaintCans } = useContext(Context);
 
   const onSubmit = (data) => {
     const wallsData = formatWallsDataToApiFormat(data);
 
-    console.log(wallsData);
-
     axios.post('http://localhost:4000/paints/', wallsData)
       .then((data) => {
         console.log(data);
+        setPaintCans(data.data);
       })
       .catch((error) => {
         console.log(error);
