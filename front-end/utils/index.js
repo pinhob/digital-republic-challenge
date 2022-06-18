@@ -1,0 +1,1 @@
+export { formatWallsDataToApiFormat } from './formatWallsDataToApiFormat';
