@@ -6,7 +6,7 @@ import { Context } from "../context";
 
 export const Forms = () => {
   const { register, handleSubmit } = useForm();
-  const { setPaintCans } = useContext(Context);
+  const { setPaintCans, setError } = useContext(Context);
 
   const onSubmit = (data) => {
     const wallsData = formatWallsDataToApiFormat(data);
@@ -15,9 +15,11 @@ export const Forms = () => {
       .then((data) => {
         console.log(data);
         setPaintCans(data.data);
+        setError(false);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data.error);
+        setError(error);
       });
   }
 

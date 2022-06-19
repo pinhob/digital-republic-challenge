@@ -4,7 +4,7 @@ import { PaintCanCard } from "./PaintCanCard";
 
 export const Results = () => {
   const [cans, setCans] = useState([]);
-  const { paintCans } = useContext(Context);
+  const { paintCans, error } = useContext(Context);
 
   const paintCansNumbers = (paintCans) => {
     const neededCansResult = paintCans.data && Object.entries(paintCans.data).filter(([_key, value]) => value > 0);
