@@ -1,10 +1,10 @@
-import { Results } from "../components"
+import { Header, Results } from "../components"
 import { Forms } from "../components/Forms"
 
 export default function Home() {
   return (
     <div>
-      <h1>Interior Paints Calculator</h1>
+      <Header />
       <Forms />
       <Results />
     </div>
