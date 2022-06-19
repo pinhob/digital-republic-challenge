@@ -1,4 +1,8 @@
-import { Header, Results } from "../components"
+import {
+  Footer,
+  Header,
+  Results
+} from "../components"
 import { Forms } from "../components/Forms"
 
 export default function Home() {
@@ -7,6 +11,7 @@ export default function Home() {
       <Header />
       <Forms />
       <Results />
+      <Footer />
     </div>
   )
 };
