@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context";
+import { PaintCanCard } from "./PaintCanCard";
 
 export const Results = () => {
   const [cans, setCans] = useState([]);
-  const [isLoading, setLoading] = useState(false);
   const { paintCans } = useContext(Context);
 
   const paintCansNumbers = (paintCans) => {
@@ -19,17 +19,15 @@ export const Results = () => {
   }, [paintCans]);
 
   return (
-    <div>
+    <section>
       <h1>Results</h1>
       {
         cans
           ? cans.map(([key, value]) => (
-            <p key={key}>
-              {key}: {value}
-            </p>
+            <PaintCanCard size={key} quantity={value} />
           ))
           : <p>Calculate to get a result</p>
       }
-    </div>
+    </section>
   )
 };
