@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context";
+import { StyledWrapper } from "../styles";
+import { StyledResults } from "../styles/StyledResults";
 import { PaintCanCard } from "./PaintCanCard";
 
 export const Results = () => {
@@ -19,22 +21,26 @@ export const Results = () => {
   }, [paintCans]);
 
   return (
-    <section>
-      <h1>Results</h1>
-      {
-        cans
-          ? (
-            <>
-              {
-                cans.map(([key, value]) => (
-                  <PaintCanCard size={key} quantity={value} />
-                ))
-              }
-              <button>Buy All</button>
-            </>
-          )
-          : <p>Calculate to get a result</p>
-      }
-    </section>
+    <StyledResults>
+      <div className="wrapper">
+        <h2 className="title">Results</h2>
+        {
+          cans
+            ? (
+              <>
+                <div className="results__card--wrapper">
+                  {
+                    cans.map(([key, value]) => (
+                      <PaintCanCard size={key} quantity={value} />
+                    ))
+                  }
+                </div>
+                <button>Buy All</button>
+              </>
+            )
+            : <p>Calculate to get a result</p>
+        }
+      </div>
+    </StyledResults>
   )
 };

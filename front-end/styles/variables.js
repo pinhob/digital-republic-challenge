@@ -9,6 +9,9 @@ const variables = css`
   --red: #E54E20;
   --black: #080808;
   --white: #FFF;
+  --blue: #3943B7;
+  --dark-blue: #30399C;
+  --green: #649537;
 }
 `
 
