@@ -23,9 +23,16 @@ export const Results = () => {
       <h1>Results</h1>
       {
         cans
-          ? cans.map(([key, value]) => (
-            <PaintCanCard size={key} quantity={value} />
-          ))
+          ? (
+            <>
+              {
+                cans.map(([key, value]) => (
+                  <PaintCanCard size={key} quantity={value} />
+                ))
+              }
+              <button>Buy All</button>
+            </>
+          )
           : <p>Calculate to get a result</p>
       }
     </section>
