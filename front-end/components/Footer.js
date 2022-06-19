@@ -1,5 +1,9 @@
+import { StyledFooter } from "../styles";
+
 export const Footer = () => {
   return (
-    <p>Challenge made by Bruno Pinho</p>
+    <StyledFooter>
+      <p>Challenge made by <a href="https://www.linkedin.com/in/brunopinhodefreitas/" target="_blank">Bruno Pinho</a></p>
+    </StyledFooter>
   )
 };
