@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../../index');
+const app = require('../../api/app');
 const mocks = require('../mocks');
 
 describe('Paints route', () => {
