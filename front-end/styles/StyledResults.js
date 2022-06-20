@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const StyledResults = styled.section`
   background-color: var(--light-gray);
+  padding-bottom: 2rem;
   
   .title {
     color: var(--orange);
