@@ -4,6 +4,6 @@ const router = express.Router();
 
 const paints = require('./paints.route');
 
-router.use('/paints', paints);
+router.use('/v1/paints', paints);
 
 module.exports = router;

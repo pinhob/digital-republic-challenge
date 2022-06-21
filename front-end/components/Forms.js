@@ -13,7 +13,7 @@ export const Forms = () => {
   const onSubmit = (data) => {
     const wallsData = formatWallsDataToApiFormat(data);
 
-    axios.post('http://localhost:4242/paints/', wallsData)
+    axios.post('http://localhost:4242/v1/paints/', wallsData)
       .then((data) => {
         setPaintCans(data.data);
         setError(false);
