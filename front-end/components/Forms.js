@@ -15,7 +15,7 @@ export const Forms = () => {
 
     console.log(wallsData);
 
-    axios.post('http://localhost:4000/paints/', wallsData)
+    axios.post('http://localhost:4242/paints/', wallsData)
       .then((data) => {
         console.log(data);
         setPaintCans(data.data);
