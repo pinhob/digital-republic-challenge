@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context";
-import { StyledWrapper } from "../styles";
 import { StyledResults } from "../styles/StyledResults";
 import { PaintCanCard } from "./PaintCanCard";
 
 export const Results = () => {
   const [cans, setCans] = useState([]);
-  const { paintCans, error } = useContext(Context);
+  const { paintCans } = useContext(Context);
 
   const paintCansNumbers = (paintCans) => {
     const neededCansResult = paintCans.data && Object.entries(paintCans.data).filter(([_key, value]) => value > 0);
@@ -15,9 +14,7 @@ export const Results = () => {
   }
 
   useEffect(() => {
-    console.log("RESULTS", paintCans);
-    console.log(paintCansNumbers(paintCans))
-    console.log(cans)
+    paintCansNumbers(paintCans)
   }, [paintCans]);
 
   return (

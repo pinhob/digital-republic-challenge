@@ -27,7 +27,6 @@ const getPaintCans = ({ walls }) => {
 
   const wallsArea = {};
   walls.forEach((wall, index) => {
-    // TODO: Componetizar de forma melhor esta lógica. Colocar todas as validações em um único aruqivo. 
     if (wall.height < 2.20 && wall.doors > 0) {
       throw errorMessageConstructor(400, `Wall height must be at least 30 centimeters bigger than door height`);
     }

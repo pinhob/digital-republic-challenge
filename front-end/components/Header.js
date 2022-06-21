@@ -1,5 +1,3 @@
-// import { } from '../public/images/republic_logo.png'
-
 import { StyledHeader } from "../styles";
 
 export const Header = () => {

@@ -6,7 +6,6 @@ const getWallArea = (wall) => {
 const getWindowsAndDoorsArea = (wall) => {
   const { windows, doors } = wall;
 
-  // TODO: criar arquivo separado para armazenar esses valores?
   const windowHeight = 2.00;
   const windowWidth = 1.20;
   const doorHeight = 0.80;
